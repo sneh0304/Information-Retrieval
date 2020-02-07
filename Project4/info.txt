@@ -1,0 +1,3 @@
+SentimentAnalysis: code for determining the sentiment of the tweets retrieved
+Topic_categorisation: code for dividing the tweets into different categories
+application: the main application, which was hosted on AWS EC2 instance

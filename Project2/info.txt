@@ -1,0 +1,3 @@
+input_corpus: The document
+SampleInput: input used to test the code
+SampleOutput: expected output

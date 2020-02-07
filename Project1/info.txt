@@ -1,0 +1,4 @@
+Token: used to make twitter_credentials.json file with your own twitter developer account
+TweetCrawl: used to crawl tweet based on twitter handle given by you
+tweetPreProcessor: used to clean/pre-process the tweets received from twitter
+RemoveRetweets: used to remove retweets

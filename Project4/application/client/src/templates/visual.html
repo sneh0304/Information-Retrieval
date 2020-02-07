@@ -1,0 +1,108 @@
+<!-- <div class="">
+  Visualization
+</div> -->
+<div class="">
+
+</div>
+<style>
+.button2 {
+  display: inline-block;
+  padding: 8px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  background-color: black;
+  border-radius: 6px;
+  box-shadow: 0 4px gray;
+}
+
+.button2:hover {background-color: black}
+
+.button2:active {
+  background-color: black;
+  box-shadow: 0 2px gray;
+  transform: translateY(3px);
+}
+</style>
+
+<br><br><body>
+  <span>
+    <span style="padding-left:20px">
+      <button class="button" ng-click="visual.sentimentClicked()">Sentiment Analysis</button>
+    </span>
+    <span style="padding-left:10px">
+      <button class="button" ng-click="visual.categoryClicked()">Categorization</button>
+    </span>
+  </span>
+  <br><br><br>
+  <div class="" style="font-weight:700;font-size:20px;padding-left:20px" ng-if="visual.sent == false && visual.cat == false">
+    Click on the type of visual analysis that you wish to see
+  </div>
+
+<div class="" ng-if="visual.sent == true">
+  <!-- Sentiment -->
+  <!-- <zingchart id = "myChart" zc-json = "visual.myJson" zc-height = 500 zc-width = 600 ></zingchart> -->
+  <br><div class="">
+    <span>
+      <span style="color:Blue;padding-left:20px;font-weight:500">Neutral</span>
+      <span style="color:red;padding-left:20px;font-weight:500">Negative</span>
+      <span style="color:green;padding-left:20px;font-weight:500">Positive</span>
+  </span>
+  </div>
+  <div style="float:left">
+    <zingchart zc-json = "visual.myConfig" zc-height = 500 zc-width = 1000></zingchart>
+  </div>
+  <div style="float:right;padding-right:150px"><ul>
+    0: <span style="font-weight:500">narendramodi</span>
+  </ul>
+  <ul>
+    1: <span style="font-weight:500">myogiadityanath</span>
+  </ul>
+  <ul>
+    2: <span style="font-weight:500">dilmabr</span>
+  </ul>
+  <ul>
+    3: <span style="font-weight:500">hillaryclinton</span>
+  </ul>
+  <ul>
+    4: <span style="font-weight:500">barackobama</span>
+  </ul>
+  <ul>
+    5: <span style="font-weight:500">micheltemer</span>
+  </ul>
+  <ul>
+    6: <span style="font-weight:500">jairbolsonaro</span>
+  </ul>
+  <ul>
+    7: <span style="font-weight:500">sushilmodi</span>
+  </ul>
+  <ul>
+    8: <span style="font-weight:500">lucianohuck</span>
+  </ul>
+  <ul>
+    9: <span style="font-weight:500">chucktodd</span>
+  </ul>
+  <ul>
+    10: <span style="font-weight:500">carlosbolsonaro</span>
+  </ul>
+  <ul>
+    11: <span style="font-weight:500">ravishndtv</span>
+  </ul>
+  <ul>
+    12: <span style="font-weight:500">megynkelly</span>
+  </ul>
+  <ul>
+    13: <span style="font-weight:500">nitishkumar</span>
+  </ul>
+  <ul>
+    14: <span style="font-weight:500">kamalaharris</span>
+  </ul>
+</div>
+</div>
+<div class="" ng-if="visual.cat == true">
+  <div style="float:left">
+    <zingchart id = "myChart" zc-json = "visual.pieChart" zc-height = 600 zc-width = 1000></zingchart>
+  </div>
+</div>
+</body>

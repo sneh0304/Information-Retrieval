@@ -1,0 +1,126 @@
+<style>
+.button1 {
+  display: inline-block;
+  padding: 6px 10px;
+  font-size: 10px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  background-color: black;
+  border-radius: 6px;
+  box-shadow: 0 2px gray;
+  /* margin: 5px 5px 10px 70px; */
+}
+
+.button1:hover {background-color: black}
+
+.button1:active {
+  background-color: black;
+  box-shadow: 0 1px gray;
+  transform: translateY(1px);
+}
+.horizontal {
+    margin: 0;
+    padding: 20px;
+}
+
+.horizontal li {
+    display: inline-grid;
+    width: 100px;
+    height: 100px;
+}
+</style>
+
+<div class="" style="width:360px; height:200px; float:right; border: 2px solid black; margin-right:20px">
+  <ul class="horizontal">
+     <li>
+       <div class="" ng-if="home.show_str">
+         <b>Country</b>
+         <div ng-repeat="country in home.countrylist">
+           <input type="checkbox" checklist-model="home.selected.country" checklist-value="country" /> {{country.name}}
+           <br/>
+         </div>
+         <!-- <button class="button1" type="button" name="button" ng-click="home.clearCountryList()">Clear</button><br> -->
+         <!-- <button class="button1" type="button" name="button" ng-click="home.applyCountryFilter()">Apply</button> -->
+       <!-- {{home.selected.country}} -->
+       </div>
+     </li>
+     <li>
+       <div class="" ng-if="home.show_str">
+         <b>Languages</b>
+         <div ng-repeat="language in home.languagelist">
+           <input type="checkbox" checklist-model="home.selected.language" checklist-value="language" /> {{language.name}}
+           <br/>
+         </div>
+         <!-- <button class="button1" type="button" name="button" ng-click="home.clearLanguageList()">Clear</button><br> -->
+         <!-- <button class="button1" type="button" name="button" ng-click="home.applyLanguageFilter()">Apply</button> -->
+       <!-- {{home.selected.language}} -->
+       </div>
+     </li>
+     <li>
+       <div class="" style="padding-left:15px" ng-if="home.show_str">
+         <b>User</b>
+         <div>
+           <input type="checkbox" checklist-model="home.selected.verified" checklist-value="verified" /> Verified
+           <br/>
+         </div>
+       <!-- {{home.selected.language}} -->
+       </div>
+     </li>
+</ul>
+<button class="button1" style="margin: 5px 5px 10px 120px"type="button" name="button" ng-click="home.clearFilter()">Clear</button>
+<button class="button1" style="margin: 5px 5px 10px 10px" type="button" name="button" ng-click="home.applyFilter()">Apply</button>
+</div>
+<div class="" ng-if="home.showPagination == true">
+  <pagination max-size="home.maxsize" ng-model="home.currentpage" total-items="home.searchData.length" items-per-page="10"></pagination>
+</div>
+<!-- <div class="" ng-if="home.showPagination == true">
+  <span style="font-weight:70;font-size:15px">Found {{home.paged.results[0].retrievedTweets}} tweets in {{home.paged.results[0].timeTaken}} seconds</span>
+</div> -->
+<div class="" ng-if="home.showNoData == true">
+  <br><span style="font-weight:700;font-size:25px">No Search Results!</span>
+</div>
+<div class="" ng-repeat='item in home.paged.results'>
+  <div class="">
+    <div class="" ng-if="item.is_bg_red" style="color:#00293e;font-size:15px;font-variant:small-caps;background-color:#FBEBEA;width:60%;float:left;border-bottom-style:solid;padding-top:20px;border-bottom-width:12px;border-color:white;">
+      <ul>
+        <a style="font-weight:500" href={{item.url}} target="_blank" ng-mouseover="item.open = true" ng-mouseleave="item.open = false">Tweet</a>
+      </ul>
+      <ul style="word-wrap:break-word; width:800px">{{item.text}}</ul>
+      <ul> <span style="padding-right:25px"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABtElEQVRIie2UPWsUURSGnzMzYfzaZWJhxIjurlsJCfgDAkGCqN1WAf9A2IlsEVDsYnqDEHBFCyGFhY2VoI0gxH9g7CY7IqLgBxuyk4/BuXMsYsIYFnbCIlrsW937wnmfFy73wED/WpK9VJe2zgIEjWOfzj/cvCRqruQPkrZtm9fBjLfWFVC63/bEdVYANE4mjo96W5vfo5cClw9ROBZRv1UvPvkDUF1S1zjRK2Dyt//GTk5cTd32EU2HVlDGDgMxmIsffa8F4HBXLeNEy5lwgEnjRMvhl+Eb1ZPb11MnvdkrVdFrwDjg2thTwGMApzTSuYfKdJeZ6fJI9COoF2aBO70AlQedHRXGAUQ5s+dbH+rFudAviCgLe6YoC6FfkHA3vC9Z/QYMAP8/wOk3oNzcWASZ04ynwny52ZlHddHJmJ8z51qpubHds13iPA2+Hr1VPhWNAgf/0rPwW+H2/i6qPlq/YIz9HnBz1xfeifVzwoqHd7qtmqAh8f4bBDPemoj6QJwboIylZui5exrVOKkBq8CqxkktaEi82+GAzjXXKzb2lCCV/KD0RWu2+Da77nPPDvTX9QuXqJvNqse74wAAAABJRU5ErkJggg==">: {{item.ret_count}}</span><span>❤️: {{item.fav_count}}</span></ul>
+      <ul>
+        <span style="font-weight:500">{{item.name}}</span><span ng-show="item.verified"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAACNElEQVRIidVVPW/TUBQ979mRjUA2W4UIMUVsDCztlIGtbUJpPlhYoHRC/ICC1E8RiITSP4GANa3bBoVkd6fwC4pECymIqSSAsEn8HgOtsf3S1A1Tz+Zz7z3nXr37/IDTDhIlKVXOxyXJXQEn4wA4CK+7rjRbvb3a/C+DsdrYWdVWzzFXegfCL4bCTUrZiK3aP+rj9Z8nMpg0MzPgZA7A1eM6PMB7AhQ3c+aLYw1uruamCeFCYhQQ4N5mznzl56iQRPiTQcQBgANCbWCC7Fr2fBfYH9QAAFzF0avpavvwOzDB705M/dtINKiSGqZ4rBM74yc8g4yZuUTlbgMRV1dXNKzceI7pa3f9NGGMNlLlfFwwcIFSj1U8QlxHMfkUlzUDo0Mj4UnilLKSYHBwiQSkhyegK3pIvABDS2C3/RHz1hJs1w7UEMDTErYoKJ7Cw+sPUEwWoCt6T/GW0+pV6p2j/M+W18DJHX+W9XkL6eEJGFoCxWQBAKKIA0BNmMB1pVkAgX9Ly2lh3lrETnsXhpaAoSXQ/L6Hxa3lfuJNl9HHXt/+yNT61BBj9EuY1xUNz5IFyETGnLWAffvbUeKcUnZhI7Px9ZCQ/VHKqMN6rGnLaWPBWvam6gPSiXV+BYhwxuRadgeA0U+lDz5UcuYVPyFuEeFLA4qDA0KtYFDJrr8kwAyA7RNob3NO7r/Jma/DgWgPDqMNAPFQ+BOlbHSgByeMVDkfp5SVfDf0LeTuo8qtyl6U+tONPzPsyLRvVkb6AAAAAElFTkSuQmCC"></span>
+      </ul>
+    </div>
+    <div class="" ng-if="item.is_bg_green" style="color:#00293e;font-size:15px;font-variant:small-caps;background-color:#ecfdea;width:60%;float:left;border-bottom-style:solid;padding-top:20px;border-bottom-width:12px;border-color:white;">
+      <ul>
+        <a style="font-weight:500" href={{item.url}} target="_blank" ng-mouseover="item.open = true" ng-mouseleave="item.open = false">Tweet</a>
+      </ul>
+      <ul style="word-wrap:break-word; width:800px">{{item.text}}</ul>
+      <ul> <span style="padding-right:25px"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABtElEQVRIie2UPWsUURSGnzMzYfzaZWJhxIjurlsJCfgDAkGCqN1WAf9A2IlsEVDsYnqDEHBFCyGFhY2VoI0gxH9g7CY7IqLgBxuyk4/BuXMsYsIYFnbCIlrsW937wnmfFy73wED/WpK9VJe2zgIEjWOfzj/cvCRqruQPkrZtm9fBjLfWFVC63/bEdVYANE4mjo96W5vfo5cClw9ROBZRv1UvPvkDUF1S1zjRK2Dyt//GTk5cTd32EU2HVlDGDgMxmIsffa8F4HBXLeNEy5lwgEnjRMvhl+Eb1ZPb11MnvdkrVdFrwDjg2thTwGMApzTSuYfKdJeZ6fJI9COoF2aBO70AlQedHRXGAUQ5s+dbH+rFudAviCgLe6YoC6FfkHA3vC9Z/QYMAP8/wOk3oNzcWASZ04ynwny52ZlHddHJmJ8z51qpubHds13iPA2+Hr1VPhWNAgf/0rPwW+H2/i6qPlq/YIz9HnBz1xfeifVzwoqHd7qtmqAh8f4bBDPemoj6QJwboIylZui5exrVOKkBq8CqxkktaEi82+GAzjXXKzb2lCCV/KD0RWu2+Da77nPPDvTX9QuXqJvNqse74wAAAABJRU5ErkJggg==">: {{item.ret_count}}</span><span>❤️: {{item.fav_count}}</span></ul>
+      <ul>
+        <span style="font-weight:500">{{item.name}}</span><span ng-show="item.verified"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAACNElEQVRIidVVPW/TUBQ979mRjUA2W4UIMUVsDCztlIGtbUJpPlhYoHRC/ICC1E8RiITSP4GANa3bBoVkd6fwC4pECymIqSSAsEn8HgOtsf3S1A1Tz+Zz7z3nXr37/IDTDhIlKVXOxyXJXQEn4wA4CK+7rjRbvb3a/C+DsdrYWdVWzzFXegfCL4bCTUrZiK3aP+rj9Z8nMpg0MzPgZA7A1eM6PMB7AhQ3c+aLYw1uruamCeFCYhQQ4N5mznzl56iQRPiTQcQBgANCbWCC7Fr2fBfYH9QAAFzF0avpavvwOzDB705M/dtINKiSGqZ4rBM74yc8g4yZuUTlbgMRV1dXNKzceI7pa3f9NGGMNlLlfFwwcIFSj1U8QlxHMfkUlzUDo0Mj4UnilLKSYHBwiQSkhyegK3pIvABDS2C3/RHz1hJs1w7UEMDTErYoKJ7Cw+sPUEwWoCt6T/GW0+pV6p2j/M+W18DJHX+W9XkL6eEJGFoCxWQBAKKIA0BNmMB1pVkAgX9Ly2lh3lrETnsXhpaAoSXQ/L6Hxa3lfuJNl9HHXt/+yNT61BBj9EuY1xUNz5IFyETGnLWAffvbUeKcUnZhI7Px9ZCQ/VHKqMN6rGnLaWPBWvam6gPSiXV+BYhwxuRadgeA0U+lDz5UcuYVPyFuEeFLA4qDA0KtYFDJrr8kwAyA7RNob3NO7r/Jma/DgWgPDqMNAPFQ+BOlbHSgByeMVDkfp5SVfDf0LeTuo8qtyl6U+tONPzPsyLRvVkb6AAAAAElFTkSuQmCC"></span>
+      </ul>
+    </div>
+    <div class="" ng-if="item.is_bg_white" style="color:#00293e;font-size:15px;font-variant:small-caps;background-color:#F5F8FA;width:60%;float:left;border-bottom-style:solid;padding-top:20px;border-bottom-width:12px;border-color:white;">
+      <ul>
+        <a style="font-weight:500" href={{item.url}} target="_blank" ng-mouseover="item.open = true" ng-mouseleave="item.open = false">Tweet</a>
+      </ul>
+      <ul style="word-wrap:break-word; width:800px">{{item.text}}</ul>
+      <ul> <span style="padding-right:25px"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABtElEQVRIie2UPWsUURSGnzMzYfzaZWJhxIjurlsJCfgDAkGCqN1WAf9A2IlsEVDsYnqDEHBFCyGFhY2VoI0gxH9g7CY7IqLgBxuyk4/BuXMsYsIYFnbCIlrsW937wnmfFy73wED/WpK9VJe2zgIEjWOfzj/cvCRqruQPkrZtm9fBjLfWFVC63/bEdVYANE4mjo96W5vfo5cClw9ROBZRv1UvPvkDUF1S1zjRK2Dyt//GTk5cTd32EU2HVlDGDgMxmIsffa8F4HBXLeNEy5lwgEnjRMvhl+Eb1ZPb11MnvdkrVdFrwDjg2thTwGMApzTSuYfKdJeZ6fJI9COoF2aBO70AlQedHRXGAUQ5s+dbH+rFudAviCgLe6YoC6FfkHA3vC9Z/QYMAP8/wOk3oNzcWASZ04ynwny52ZlHddHJmJ8z51qpubHds13iPA2+Hr1VPhWNAgf/0rPwW+H2/i6qPlq/YIz9HnBz1xfeifVzwoqHd7qtmqAh8f4bBDPemoj6QJwboIylZui5exrVOKkBq8CqxkktaEi82+GAzjXXKzb2lCCV/KD0RWu2+Da77nPPDvTX9QuXqJvNqse74wAAAABJRU5ErkJggg==">: {{item.ret_count}}</span><span>❤️: {{item.fav_count}}</span></ul>
+      <ul>
+        <span style="font-weight:500">{{item.name}}</span><span ng-show="item.verified"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAACNElEQVRIidVVPW/TUBQ979mRjUA2W4UIMUVsDCztlIGtbUJpPlhYoHRC/ICC1E8RiITSP4GANa3bBoVkd6fwC4pECymIqSSAsEn8HgOtsf3S1A1Tz+Zz7z3nXr37/IDTDhIlKVXOxyXJXQEn4wA4CK+7rjRbvb3a/C+DsdrYWdVWzzFXegfCL4bCTUrZiK3aP+rj9Z8nMpg0MzPgZA7A1eM6PMB7AhQ3c+aLYw1uruamCeFCYhQQ4N5mznzl56iQRPiTQcQBgANCbWCC7Fr2fBfYH9QAAFzF0avpavvwOzDB705M/dtINKiSGqZ4rBM74yc8g4yZuUTlbgMRV1dXNKzceI7pa3f9NGGMNlLlfFwwcIFSj1U8QlxHMfkUlzUDo0Mj4UnilLKSYHBwiQSkhyegK3pIvABDS2C3/RHz1hJs1w7UEMDTErYoKJ7Cw+sPUEwWoCt6T/GW0+pV6p2j/M+W18DJHX+W9XkL6eEJGFoCxWQBAKKIA0BNmMB1pVkAgX9Ly2lh3lrETnsXhpaAoSXQ/L6Hxa3lfuJNl9HHXt/+yNT61BBj9EuY1xUNz5IFyETGnLWAffvbUeKcUnZhI7Px9ZCQ/VHKqMN6rGnLaWPBWvam6gPSiXV+BYhwxuRadgeA0U+lDz5UcuYVPyFuEeFLA4qDA0KtYFDJrr8kwAyA7RNob3NO7r/Jma/DgWgPDqMNAPFQ+BOlbHSgByeMVDkfp5SVfDf0LeTuo8qtyl6U+tONPzPsyLRvVkb6AAAAAElFTkSuQmCC"></span>
+      </ul>
+    </div>
+    <div class="" ng-show="item.open" style="position:sticky;width:40%;float:right;background-color:white ! important">
+      <ul>
+        <twitter-widget twitter-widget-id="item.id">
+        </twitter-widget>
+      </ul>
+    </div>
+    <!-- <br style="clear:both;"/> -->
+  </div>
+</div>
+
+<!-- ♡ -->
+<!-- <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Sunsets don&#39;t get much better than this one over <a href="https://twitter.com/GrandTetonNPS?ref_src=twsrc%5Etfw">@GrandTetonNPS</a>. <a href="https://twitter.com/hashtag/nature?src=hash&amp;ref_src=twsrc%5Etfw">#nature</a> <a href="https://twitter.com/hashtag/sunset?src=hash&amp;ref_src=twsrc%5Etfw">#sunset</a> <a href="http://t.co/YuKy2rcjyU">pic.twitter.com/YuKy2rcjyU</a></p>&mdash; US Department of the Interior (@Interior) <a href="https://twitter.com/Interior/status/463440424141459456?ref_src=twsrc%5Etfw">May 5, 2014</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr" ng-app='search.app'>
+  <head>
+    <script type="text/javascript" src='{% static "src/vendor/angular.min.js" %}'></script>
+    <script type="text/javascript" src='{% static "src/vendor/angular-ui-router.min.js" %}'></script>
+    <script type="text/javascript" src='{% static "src/vendor/bower_components/ngtweet/dist/ngtweet.min.js" %}'></script>
+    <script type="text/javascript" src='{% static "src/vendor/bower_components/jsSHA/src/sha1.js" %}'></script>
+    <script type="text/javascript" src='{% static "src/vendor/bower_components/angular-charts/dist/angular-charts.min.js" %}'></script>
+    <script type="text/javascript" src='{% static "src/vendor/checklist-model.min.js" %}'></script>
+    <script type="text/javascript" src= '{% static "src/modules/module.js" %}'></script>
+    <script type="text/javascript" src='{% static "src/modules/routes.js" %}'></script>
+    <script type="text/javascript" src='{% static "src/modules/app.js" %}'></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script data-require="angular-ui-bootstrap@0.11.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>
+    <link rel="stylesheet" href='{% static "src/css/styles1.css" %}'>
+    <script src = "https://cdn.zingchart.com/zingchart.min.js" ></script>
+    <script src = "https://cdn.zingchart.com/angular/zingchart-angularjs.js" ></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <!-- <script type="text/javascript" src= "vendor/angular.min.js"></script>
+    <script type="text/javascript" src= "vendor/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src= "modules/module.js"></script>
+    <script type="text/javascript" src= "modules/app.js"></script>
+    <script type="text/javascript" src= "modules/routes.js"></script> -->
+    <meta charset="utf-8">
+    <title>Search Engine</title>
+  </head>
+  <style>
+  .button {
+    display: inline-block;
+    padding: 8px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    background-color: black;
+    border-radius: 6px;
+    box-shadow: 0 4px gray;
+  }
+
+  .button:hover {background-color: black}
+
+  .button:active {
+    background-color: black;
+    box-shadow: 0 2px gray;
+    transform: translateY(3px);
+  }
+  </style>
+  <!-- <div class="jumbotron text-center"> -->
+  <div >
+    <h1 style="padding-left:40%"><a href="/" ng-click="ctrl.clearData()"><img src='{% static "src/css/images1.jpg" %}' alt=""></a></h1>
+  </div>
+  {% verbatim %}
+  <br>
+  <body ng-controller='MainController as ctrl'>
+    <span style="padding-left:28%" ng-if="ctrl.hide_search == false">
+      <input style="border: 2px solid black;padding:6px 8px;width:230px;border-radius:6px;font-weight:500;font-kerning:none;" type="text" name="" value="" ng-model="ctrl.search_string">
+    </span>
+    <span>
+      <span style="padding-left:10px" ng-if="ctrl.hide_search == false">
+        <!-- <button style="background-color:black;padding:10px 25px;font-size:16px;color:white;border-radius:9px;box-shadow: 0 5px gray;transform:translateY(4px);" type="button" ng-click='ctrl.search()' ng-if="ctrl.hide_search == false">Search</button> -->
+        <button class="button" type="button" ng-click='ctrl.search()'>Search</button>
+      </span>
+      <!-- <button type="button" ng-click='ctrl.search()' ui-sref="home" ui-sref-opts="{reload: true}" ng-if="ctrl.hide_search == false">Search</button> -->
+      <span style="padding-left:20px" ng-if="ctrl.showVisual == true">
+        <button class="button" type="button" ng-click="ctrl.clicked()" ui-sref="visualization" ui-sref-opts="{reload: true}">Visualization</button>
+      </span>
+      <span style="padding-left:20px" ng-if="ctrl.showQueryVisual == true">
+        <button class="button" type="button" ui-sref="queryanalysis" ui-sref-opts="{reload: true}">Query Analysis</button>
+      </span>
+    </span>
+
+    <ui-view></ui-view>
+    <!-- <div class="" ng-if='ctrl.isAuthenticated'>
+      <ui-view></ui-view>
+    </div> -->
+
+  </body>
+  {% endverbatim %}
+</html>
